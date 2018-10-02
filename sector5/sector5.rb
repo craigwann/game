@@ -28,7 +28,12 @@ class SectorFive < Gosu::Window
 
         @enemies.each do |enemy|
             enemy.move
+        end
+
+        @bullets.each do |bullet|
+            bullet.move
           end
+      
       
     end    
 
@@ -43,7 +48,11 @@ class SectorFive < Gosu::Window
         @player.draw
         @enemies.each do |enemy|
             enemy.draw
-          end
+        end
+
+        @bullets.each do |bullet|
+            bullet.draw
+          end      
         
     end
 
