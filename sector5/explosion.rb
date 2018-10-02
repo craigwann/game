@@ -1,4 +1,5 @@
 class Explosion
+    attr_reader :finished
 
     def initialize(window, x, y)
         @x = x

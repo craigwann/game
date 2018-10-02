@@ -47,8 +47,20 @@ class SectorFive < Gosu::Window
               end
             end
         end 
-      
-      
+
+        @explosions.dup.each do |explosion|
+            @explosions.delete explosion if explosion.finished
+        end
+        
+        @enemies.dup.each do |enemy|
+            if enemy.y > HEIGHT + enemy.radius
+                @enemies.delete enemy 
+            end
+        end
+
+        @bullets.dup.each do |bullet|
+            @bullets.delete bullet unless bullet.onscreen?
+        end
       
     end    
 
