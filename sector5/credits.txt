@@ -6,7 +6,7 @@ Learn Game Programming with Ruby
 by Mark Sobkowicz
 
 ---Images---
-
+custom images by Craig Wann
 Game art from OpenGameArt.org
 Licensed under Creative Commons: Public Domain CC0
 

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" height="45" viewBox="0 0 45 45">
+  <defs>
+    <radialGradient id="a" cx="22.5" cy="17.92" r="10.56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="gray"/>
+    </radialGradient>
+  </defs>
+  <title>ship</title>
+  <rect width="45" height="45" style="fill: none"/>
+  <path d="M8.29,38.6c3.29-1.89,8.43-3.1,14.21-3.1s10.92,1.22,14.21,3.1A21.43,21.43,0,0,0,44,22.5h0A22,22,0,0,1,22.51,1h0A22,22,0,0,1,1,22.49H1A21.43,21.43,0,0,0,8.29,38.6Z" transform="translate(0 0)" style="fill: #29abe2"/>
+  <ellipse cx="22.5" cy="22" rx="5" ry="8" style="fill: url(#a)"/>
+</svg>
