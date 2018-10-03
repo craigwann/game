@@ -1,6 +1,8 @@
 # 2D game using GOSU gem
 #### Capstone project by Craig Wann
 
+resolution 1280×800
+
 Project’s Purpose or Goal: 
 
 List the absolute minimum features the project requires to meet this purpose or goal:

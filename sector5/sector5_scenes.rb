@@ -5,8 +5,8 @@ require_relative 'bullet'
 require_relative 'explosion'
 require_relative 'credit'
 class SectorFive < Gosu::Window
-  WIDTH = 800
-  HEIGHT = 600
+  WIDTH = 1280
+  HEIGHT = 800
   ENEMY_FREQUENCY = 0.05
   MAX_ENEMIES = 100
   def initialize
@@ -25,6 +25,7 @@ class SectorFive < Gosu::Window
     @scene = :game
     @enemies_appeared = 0
     @enemies_destroyed = 0
+    @background_game = Gosu::Image.new('images/background_stars.png')
     @game_music = Gosu::Song.new('sounds/Cephalopod.ogg')
     @game_music.play(true)
     @explosion_sound = Gosu::Sample.new('sounds/explosion.ogg')
@@ -100,6 +101,8 @@ class SectorFive < Gosu::Window
     @background_image.draw(0,0,0)
   end
   def draw_game
+    @background_game.draw(0,0,0)
+
     @player.draw
     @enemies.each do |enemy|
       enemy.draw
@@ -181,8 +184,8 @@ class SectorFive < Gosu::Window
       end
     end 
     draw_line(0,140,Gosu::Color::RED,WIDTH,140,Gosu::Color::RED)
-    @message_font.draw(@message,40,40,1,1,1,Gosu::Color::FUCHSIA)
-    @message_font.draw(@message2,40,75,1,1,1,Gosu::Color::FUCHSIA)
+    @message_font.draw(@message,40,40,1,1,1,Gosu::Color::YELLOW)
+    @message_font.draw(@message2,40,75,1,1,1,Gosu::Color::GREEN)
     draw_line(0,500,Gosu::Color::RED,WIDTH,500,Gosu::Color::RED)
     @message_font.draw(@bottom_message,180,540,1,1,1,Gosu::Color::AQUA)
   end
