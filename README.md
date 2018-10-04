@@ -11,7 +11,7 @@
 1. Install physics library `gem install chipmunk`
 1. navigate to directory `game/sector5`
 1. `ruby sector5_scenes.rb`
-![splash screen](sector5/images/screenshot.png)
+![splash screen](sector5/images/ScreenShot.png)
 
 resolution 1280×800
 
