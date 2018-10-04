@@ -1,9 +1,21 @@
-# 2D game using GOSU gem
-#### Capstone project by Craig Wann
+# Sector Five
+## 2D game using GOSU gem
+#### Capstone project by Craig Wann 10/4/2018
+![splash screen](sector5/images/start_screen.png)
+### Installation
+
+1. clone repository from https://github.com/craigwann/game.git
+1. Ruby version 2.5.0 used. 
+1. Audio libraries to install: `brew install sdl2 libogg libvorbis`
+1. Install Gosu gem `gem install gosu`
+1. Install physics library `gem install chipmunk`
+1. navigate to directory `game/sector5`
+1. `ruby sector5_scenes.rb`
+![splash screen](sector5/images/screenshot.png)
 
 resolution 1280×800
 
-Project’s Purpose or Goal: 
+Project’s Purpose or Goal (MVP): 
 
 List the absolute minimum features the project requires to meet this purpose or goal:
 
