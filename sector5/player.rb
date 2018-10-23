@@ -6,8 +6,8 @@ class Player
   
 
     def initialize(window)
-        @x = 200
-        @y = 200
+        @x = 640
+        @y = 600
         @angle = 0
         @image = Gosu::Image.new('images/ship.png')
         @velocity_x = 0
