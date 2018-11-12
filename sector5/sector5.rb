@@ -1,6 +1,7 @@
 require 'gosu'
 require_relative 'player'
 require_relative 'enemy'
+require_relative 'boss'
 require_relative 'bullet'
 require_relative 'explosion'
 require_relative 'credit'
