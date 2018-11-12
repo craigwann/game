@@ -3,12 +3,13 @@ require_relative 'player'
 require_relative 'enemy'
 require_relative 'bullet'
 require_relative 'explosion'
-
+require_relative 'credit'
 
 class SectorFive < Gosu::Window
-    WIDTH = 800
-    HEIGHT = 600
-    ENEMY_FREQUENCY = 0.05
+    WIDTH = 1280
+    HEIGHT = 800
+    ENEMY_FREQUENCY = 0.025
+    MAX_ENEMIES = 100
   
     def initialize
         super(WIDTH,HEIGHT)
@@ -17,7 +18,13 @@ class SectorFive < Gosu::Window
         @enemies = []
         @bullets = []
         @explosions = []
-
+        @enemies_appeared = 0
+        @enemies_destroyed = 0
+        @background_game = Gosu::Image.new('images/background_stars.png')
+        @game_music = Gosu::Song.new('sounds/Cephalopod.ogg')
+        @game_music.play(true)
+        @explosion_sound = Gosu::Sample.new('sounds/explosion.ogg')
+        @shooting_sound = Gosu::Sample.new('sounds/shoot.ogg')    
     end
 
     def update

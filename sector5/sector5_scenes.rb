@@ -4,11 +4,13 @@ require_relative 'enemy'
 require_relative 'bullet'
 require_relative 'explosion'
 require_relative 'credit'
+
 class SectorFive < Gosu::Window
   WIDTH = 1280
   HEIGHT = 800
   ENEMY_FREQUENCY = 0.05
   MAX_ENEMIES = 100
+
   def initialize
     super(WIDTH, HEIGHT)
     self.caption = "Sector Five"
@@ -32,8 +34,6 @@ class SectorFive < Gosu::Window
     @shooting_sound = Gosu::Sample.new('sounds/shoot.ogg')
   end
 
-
-
   def update
     case @scene
     when :game
@@ -42,6 +42,7 @@ class SectorFive < Gosu::Window
       update_end
     end
   end
+  
   def update_game
     @player.turn_left if button_down?(Gosu::KbLeft)
     @player.turn_right if button_down?(Gosu::KbRight)
