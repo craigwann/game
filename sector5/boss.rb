@@ -1,17 +1,26 @@
 class Boss
-    SPEED = 4
-    attr_reader :x, :y, :radius
+  WIDTH = 1280
+  HEIGHT = 800
+  SPEED = 4
+  attr_reader :x, :y, :radius
 
-    def initialize(window)
-      @radius = 30
-      @x = rand(window.width - 2 * @radius) + @radius
-      @y = 0
-      @image = Gosu::Image.new('images/boss.png') 
-    end
-    def draw
-      @image.draw(@x - @radius, @y - @radius, 1)
-    end
-    def move
-      @y += SPEED
-    end
+  def initialize(window)
+    @radius = 40
+    @x = rand(window.width - 2 * @radius) + @radius
+    @y = 41
+    @image = Gosu::Image.new('images/boss.png') 
+    @velocity_x = 3
+    @velocity_y = 2
+  end
+
+
+  def draw
+    @image.draw(@x - @radius, @y - @radius, 1)
+  end
+  def move
+    @x += @velocity_x
+    @y += @velocity_y
+    @velocity_x *= -1 if @x + @radius/2 > WIDTH || @x - @radius/2 <0
+    @velocity_y *= -1 if @y + @radius/2 > HEIGHT || @y - @radius/2 <0
+  end
 end
