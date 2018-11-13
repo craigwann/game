@@ -6,7 +6,7 @@ class Boss
       @radius = 30
       @x = rand(window.width - 2 * @radius) + @radius
       @y = 0
-      @image = Gosu::Image.new('images/enemy.png') 
+      @image = Gosu::Image.new('images/boss.png') 
     end
     def draw
       @image.draw(@x - @radius, @y - @radius, 1)

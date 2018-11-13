@@ -10,6 +10,7 @@ class SectorFive < Gosu::Window
     WIDTH = 1280
     HEIGHT = 800
     ENEMY_FREQUENCY = 0.025
+    BOSS_FREQUENCY = 0.025
     MAX_ENEMIES = 100
   
     def initialize
@@ -17,6 +18,7 @@ class SectorFive < Gosu::Window
         self.caption = 'Sector Five'
         @player = Player.new(self)
         @enemies = []
+        @bosses = []
         @bullets = []
         @explosions = []
         @enemies_appeared = 0
@@ -37,8 +39,16 @@ class SectorFive < Gosu::Window
             @enemies.push Enemy.new(self)
         end
 
+        if rand < BOSS_FREQUENCY
+            @bosses.push Boss.new(self)
+        end
+
         @enemies.each do |enemy|
             enemy.move
+        end
+
+        @bosses.each do |boss|
+            boss.move
         end
 
         @bullets.each do |bullet|
@@ -56,6 +66,18 @@ class SectorFive < Gosu::Window
             end
         end 
 
+        @bosses.dup.each do |boss|
+            @bullets.dup.each do |bullet|
+              distance = Gosu.distance(boss.x, boss.y, bullet.x, bullet.y)
+              if distance < boss.radius + bullet.radius
+                @bosses.delete boss
+                @bullets.delete bullet
+                @explosions.push Explosion.new(self, boss.x, boss.y)
+              end
+            end
+        end 
+
+
         @explosions.dup.each do |explosion|
             @explosions.delete explosion if explosion.finished
         end
@@ -63,6 +85,12 @@ class SectorFive < Gosu::Window
         @enemies.dup.each do |enemy|
             if enemy.y > HEIGHT + enemy.radius
                 @enemies.delete enemy 
+            end
+        end
+
+        @bosses.dup.each do |boss|
+            if boss.y > HEIGHT + boss.radius
+                @bosses.delete boss 
             end
         end
 
@@ -83,6 +111,10 @@ class SectorFive < Gosu::Window
         @player.draw
         @enemies.each do |enemy|
             enemy.draw
+        end
+
+        @bosses.each do |boss|
+            boss.draw
         end
 
         @bullets.each do |bullet|
