@@ -1,6 +1,4 @@
 class Boss
-  WIDTH = 1280
-  HEIGHT = 800
   SPEED = 4
   attr_reader :x, :y, :radius
 
@@ -11,6 +9,7 @@ class Boss
     @image = Gosu::Image.new('images/boss.png') 
     @velocity_x = 3
     @velocity_y = 2
+    @window = window
   end
 
 
@@ -20,7 +19,7 @@ class Boss
   def move
     @x += @velocity_x
     @y += @velocity_y
-    @velocity_x *= -1 if @x + @radius/2 > WIDTH || @x - @radius/2 <0
-    @velocity_y *= -1 if @y + @radius/2 > HEIGHT || @y - @radius/2 <0
+    @velocity_x *= -1 if @x + @radius/2 > @window.width || @x - @radius/2 <0
+    @velocity_y *= -1 if @y + @radius/2 > @window.height || @y - @radius/2 <0
   end
 end

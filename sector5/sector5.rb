@@ -2,6 +2,7 @@ require 'gosu'
 require_relative 'player'
 require_relative 'enemy'
 require_relative 'boss'
+require_relative 'bosshead'
 require_relative 'bullet'
 require_relative 'explosion'
 require_relative 'credit'
@@ -19,6 +20,7 @@ class SectorFive < Gosu::Window
         @player = Player.new(self)
         @enemies = []
         @bosses = []
+        @bossheads = []
         @bullets = []
         @explosions = []
         @enemies_appeared = 0
@@ -27,7 +29,8 @@ class SectorFive < Gosu::Window
         @game_music = Gosu::Song.new('sounds/Cephalopod.ogg')
         @game_music.play(true)
         @explosion_sound = Gosu::Sample.new('sounds/explosion.ogg')
-        @shooting_sound = Gosu::Sample.new('sounds/shoot.ogg')    
+        @shooting_sound = Gosu::Sample.new('sounds/shoot.ogg')
+        @background_game = Gosu::Image.new('images/background_stars.png')
     end
 
     def update
@@ -108,6 +111,7 @@ class SectorFive < Gosu::Window
   
 
     def draw
+        @background_game.draw(0,0,0)
         @player.draw
         @enemies.each do |enemy|
             enemy.draw
