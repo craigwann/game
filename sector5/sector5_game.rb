@@ -9,6 +9,7 @@ class SectorFive < Gosu::Window
   WIDTH = 1280
   HEIGHT = 800
   ENEMY_FREQUENCY = 0.05
+  BOSS_FREQUENCY = 0.005
   MAX_ENEMIES = 100
 
   def initialize
@@ -22,6 +23,7 @@ class SectorFive < Gosu::Window
   def initialize_game
     @player = Player.new(self)
     @enemies = []
+    @bosses = []
     @bullets = []
     @explosions = []
     @scene = :game
@@ -48,16 +50,28 @@ class SectorFive < Gosu::Window
     @player.turn_right if button_down?(Gosu::KbRight)
     @player.accelerate if button_down?(Gosu::KbUp)
     @player.move
+
     if rand < ENEMY_FREQUENCY
       @enemies.push Enemy.new(self)
       @enemies_appeared += 1
     end
+  
+    if rand < BOSS_FREQUENCY
+      @bosses.push Boss.new(self)
+    end
+
+    @bosses.each do |boss|
+      boss.move
+   end
+
+
     @enemies.each do |enemy|
       enemy.move
     end
     @bullets.each do |bullet|
       bullet.move
     end
+
     @enemies.dup.each do |enemy|
       @bullets.dup.each do |bullet|
         distance = Gosu.distance(enemy.x, enemy.y, bullet.x, bullet.y)
@@ -70,24 +84,47 @@ class SectorFive < Gosu::Window
         end
       end
     end
+
+    @bosses.dup.each do |boss|
+      @bullets.dup.each do |bullet|
+        distance = Gosu.distance(boss.x, boss.y, bullet.x, bullet.y)
+        if distance < boss.radius + bullet.radius
+          @bosses.delete boss
+          @bullets.delete bullet
+          @explosions.push Explosion.new(self, boss.x, boss.y)
+        end
+      end
+    end 
+
     @explosions.dup.each do |explosion|
       @explosions.delete explosion if explosion.finished
     end
+
     @enemies.dup.each do |enemy|
       if enemy.y > HEIGHT + enemy.radius
         @enemies.delete enemy
       end
     end
+
+    @bosses.dup.each do |boss|
+      if boss.y > HEIGHT + boss.radius
+          @bosses.delete boss 
+      end
+    end
+
     @bullets.dup.each do |bullet|
       @bullets.delete bullet unless bullet.onscreen?
     end
+
     initialize_end(:count_reached) if @enemies_appeared > MAX_ENEMIES
     @enemies.each do |enemy|
       distance = Gosu.distance(enemy.x, enemy.y, @player.x, @player.y)
-      initialize_end(:hit_by_enemy) if distance < @player.radius + enemy.radius   
+      initialize_end(:hit_by_enemy) if distance < @player.radius + enemy.radius 
     end
+
     initialize_end(:off_top) if @player.y < -@player.radius
-  end
+    end
+
   def draw
     case @scene
     when :start
@@ -98,9 +135,11 @@ class SectorFive < Gosu::Window
       draw_end
     end
   end
+
   def draw_start
     @background_image.draw(0,0,0)
   end
+
   def draw_game
     @background_game.draw(0,0,0)
 
@@ -115,6 +154,7 @@ class SectorFive < Gosu::Window
       explosion.draw
     end
   end
+  
   def button_down(id)
     case @scene
     when :start

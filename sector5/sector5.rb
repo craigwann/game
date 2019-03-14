@@ -16,7 +16,7 @@ class SectorFive < Gosu::Window
   
     def initialize
         super(WIDTH,HEIGHT)
-        self.caption = 'Sector Five'
+        self.caption = 'Sector 5'
         @player = Player.new(self)
         @enemies = []
         @bosses = []
