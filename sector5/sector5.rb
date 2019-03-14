@@ -80,7 +80,6 @@ class SectorFive < Gosu::Window
             end
         end 
 
-
         @explosions.dup.each do |explosion|
             @explosions.delete explosion if explosion.finished
         end

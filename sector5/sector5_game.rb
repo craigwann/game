@@ -32,6 +32,7 @@ class SectorFive < Gosu::Window
     @scene = :game
     @enemies_appeared = 0
     @enemies_destroyed = 0
+    @bosses_destroyed = 0
     @background_game = Gosu::Image.new('images/background_stars.png')
     @game_music = Gosu::Song.new('sounds/Cephalopod.ogg')
     @game_music.play(true)
@@ -96,6 +97,8 @@ class SectorFive < Gosu::Window
           @bosses.delete boss
           @bullets.delete bullet
           @explosions.push Explosion.new(self, boss.x, boss.y)
+          @bosses_destroyed += 1
+          @explosion_sound.play
         end
       end
     end 
@@ -195,16 +198,16 @@ class SectorFive < Gosu::Window
   def initialize_end(fate)
     case fate
     when :count_reached
-      @message = "You made it!  You destroyed #{@enemies_destroyed} ships"
+      @message = "You made it!  You destroyed #{@enemies_destroyed} ships and #{@bosses_destroyed} boss ships."
       @message2= "and #{100 - @enemies_destroyed} reached the base."
     when :hit_by_enemy
       @message = "You were struck by an enemy ship."
       @message2 = "Before your ship was destroyed, "
-      @message2 += "you took out #{@enemies_destroyed} enemy ships."
+      @message2 += "you took out #{@enemies_destroyed} enemy ships and #{@bosses_destroyed} boss ships."
     when :off_top
       @message = "You got too close to the enemy mother ship."  
       @message2 = "Before your ship was destroyed, "
-      @message2 += "you took out #{@enemies_destroyed} enemy ships."
+      @message2 += "you took out #{@enemies_destroyed} enemy ships and #{@bosses_destroyed} boss ships."
     end
     @bottom_message = "Press P to play again, or Q to quit."
     @message_font = Gosu::Font.new(28)
