@@ -10,7 +10,7 @@ class SectorFive < Gosu::Window
   WIDTH = 1280
   HEIGHT = 800
   ENEMY_FREQUENCY = 0.05
-  BOSS_FREQUENCY = 0.05
+  BOSS_FREQUENCY = 0.005
   MAX_ENEMIES = 100
 
   def initialize
