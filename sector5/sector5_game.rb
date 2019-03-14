@@ -1,6 +1,7 @@
 require 'gosu'
 require_relative 'player'
 require_relative 'enemy'
+require_relative 'boss'
 require_relative 'bullet'
 require_relative 'explosion'
 require_relative 'credit'
@@ -9,7 +10,7 @@ class SectorFive < Gosu::Window
   WIDTH = 1280
   HEIGHT = 800
   ENEMY_FREQUENCY = 0.05
-  BOSS_FREQUENCY = 0.005
+  BOSS_FREQUENCY = 0.05
   MAX_ENEMIES = 100
 
   def initialize
@@ -20,6 +21,8 @@ class SectorFive < Gosu::Window
     @start_music = Gosu::Song.new('sounds/Lost Frontier.ogg')
     @start_music.play(true)
   end
+
+  # main game initialization
   def initialize_game
     @player = Player.new(self)
     @enemies = []
@@ -45,6 +48,7 @@ class SectorFive < Gosu::Window
     end
   end
   
+  # main game UPDATE/ANIMATION
   def update_game
     @player.turn_left if button_down?(Gosu::KbLeft)
     @player.turn_right if button_down?(Gosu::KbRight)
@@ -60,14 +64,14 @@ class SectorFive < Gosu::Window
       @bosses.push Boss.new(self)
     end
 
-    @bosses.each do |boss|
-      boss.move
-   end
-
-
     @enemies.each do |enemy|
       enemy.move
     end
+
+    @bosses.each do |boss|
+      boss.move
+    end
+
     @bullets.each do |bullet|
       bullet.move
     end
@@ -125,7 +129,8 @@ class SectorFive < Gosu::Window
     initialize_end(:off_top) if @player.y < -@player.radius
     end
 
-  def draw
+  
+    def draw
     case @scene
     when :start
       draw_start
@@ -140,6 +145,7 @@ class SectorFive < Gosu::Window
     @background_image.draw(0,0,0)
   end
 
+  # main game DRAW
   def draw_game
     @background_game.draw(0,0,0)
 
@@ -147,6 +153,11 @@ class SectorFive < Gosu::Window
     @enemies.each do |enemy|
       enemy.draw
     end
+
+    @bosses.each do |boss|
+      boss.draw
+    end
+
     @bullets.each do |bullet|
       bullet.draw
     end 
@@ -154,7 +165,7 @@ class SectorFive < Gosu::Window
       explosion.draw
     end
   end
-  
+
   def button_down(id)
     case @scene
     when :start
